@@ -87,7 +87,7 @@ html(lang='en')
     //     // /.nav-collapse
     .container
       .starter-template
-        form(role='form',action='/stuff',method='post', id='usrform')
+        form(role='form',action='/',method='post', id='usrform')
             div.form-group
                 label(for='name') Name:  
                     input.form-control(id='name',type='text',name='name')
@@ -99,11 +99,9 @@ html(lang='en')
                     input.form-control(id='tagbox',type='tagbox',name='tagbox')
             input(type='submit',value='Sign up')
 
-        textarea(rows='4', cols='50', form='usrform')
-            |Tag analysis
+        textarea(rows='4', cols='50', form='usrform', name='taganalysis')
+          | #{taganalysis}
 
-
-           // /.container
     
     // Bootstrap core JavaScript
     // ==================================================

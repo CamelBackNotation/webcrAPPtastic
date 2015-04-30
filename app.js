@@ -28,7 +28,6 @@ app.use('/', boot);
 app.use('/users', users);
 app.use('/boot', boot);
 
-app.use('/stuff', stuff);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
