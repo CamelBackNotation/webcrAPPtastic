@@ -21,9 +21,6 @@ router.get('/mywebsite', function(req, res, next) {
     res.render('mywebsite', {});
 });
 
-router.get('/mywebsite', function(req, res, next) {
-    res.render('mywebsite', {});
-});
 
 var params = {
     title: 'Hell!',
