@@ -9,7 +9,7 @@ var router = express.Router();
 
 router.post('/', function(req, res, next) {
     console.log(req.body);
-    res.send("Thank you for signing up "+ req.body.name);
+    res.send("fuck you peeber"+ req.body.name);
 });
 
 router.get('/', function(req, res, next) {
