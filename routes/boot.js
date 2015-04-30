@@ -13,7 +13,7 @@ router.get('/mywebsite', function(req, res, next) {
 var params = {
     title: 'Hell!',
     description: "Well that's what you're here to find out!",
-    menu: ['ExpressTest', 'Home', 'Portfolio', 'About', 'Contact'],
+    menu: ['ExpressTest', 'Home', 'Website', 'About', 'Contact'],
 
     //Necessary bootstrap.jade paths
     pathToAssets: 'bootstrap',

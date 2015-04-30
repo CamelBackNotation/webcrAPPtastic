@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var indico = require('indico.io');
+indico.apiKey = '98fb49ab39eaa7507cf3f36379379bca';
 
 /* GET home page. */
 // router.post('/index', function(req, res, next) {
@@ -8,8 +10,11 @@ var router = express.Router();
 
 
 router.post('/', function(req, res, next) {
-    console.log(req.body);
-    res.send("fuck you peeber");
+    console.log(req.body.tagbox);
+    var analysis = indico.text_tags(req.body.tagbox);
+    params.textBox = analysis;
+    res.render('boot', params);
+    console.log(params.textBox);
 });
 
 router.get('/', function(req, res, next) {
@@ -19,7 +24,10 @@ router.get('/', function(req, res, next) {
 var params = {
     title: 'Hell!',
     description: "Well that's what you're here to find out!",
-    menu: ['Home', 'Derp', 'Cats']
+    menu: ['ExpressTest', 'Home', 'Website', 'About', 'Contact'],
+    textBox: "",
+    pathToAssets: 'bootstrap',
+    pathToSelectedTemplateWithinBootstrap: 'bootstrap/docs/examples/starter-template'
 };
 
 module.exports = router;
