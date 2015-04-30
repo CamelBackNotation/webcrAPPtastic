@@ -18,11 +18,11 @@ router.get('/', function(req, res, next) {
   res.render('boot', params);
 });
 router.get('/mywebsite', function(req, res, next) {
-    res.render('mywebsite', {pathToAssets: 'public'});
+    res.render('mywebsite', {});
 });
 
 router.get('/mywebsite', function(req, res, next) {
-    res.render('mywebsite', {pathToAssets: 'public'});
+    res.render('mywebsite', {});
 });
 
 var params = {
