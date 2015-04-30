@@ -9,7 +9,7 @@ var router = express.Router();
 
 router.post('/', function(req, res, next) {
     console.log(req.body);
-    res.send("fuck you peeber"+ req.body.name);
+    res.send("fuck you peeber");
 });
 
 router.get('/', function(req, res, next) {
