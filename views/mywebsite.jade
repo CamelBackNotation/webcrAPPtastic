@@ -374,7 +374,8 @@ block content
               .modal-body
                 h2 Myo Desktop Demo
                 |                             
-                iframe(width="560", height="315", src="https://www.youtube.com/embed/HCUGjkVbd2I", frameborder="0" allowfullscreen)
+                .embed-responsive.embed-responsive-16by9(align='center')
+                iframe.embed-responsive-item(src="https://www.youtube.com/embed/HCUGjkVbd2I", frameborder="0" allowfullscreen='')
                 |                             
                 p
                   | This project took us 3 hours from start to finish. We decided to do this because our first idea of a motion-controlled occulus-experienced flight simulator fell through. The drivers we used for the Myo were open-source and provided us the raw EMG data to create our custom gestures.
