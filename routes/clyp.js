@@ -62,12 +62,14 @@ router.get('/random', function(req, res, next) {
                 params.latitude = item.Latitude;
                 params.longitude = item.Longitude;
                 params.url = item.Url;
+                params.mp3 = item.Mp3Url;
             });
         });
     });
     console.log(params.longitude);
     console.log(params.latitude);
     console.log(params.url);
+    console.log(params.mp3);
     res.render('clyp', params); 
 });
 
@@ -78,6 +80,7 @@ var params = {
     longitude: -97.74,
     latitude: 30.3,
     url: '',
+    mp3: '',
     API_KEY: 'AIzaSyCQ-y9WlQd9Y_TNL4JwvAHFbuxo7m2KGxA'
   }
 
