@@ -38,7 +38,7 @@ router.post('/peeber', function(req, res, next) {
 });
 router.get('/peeber', function(req, res, next) {
     params.images[0] = ['img/peeber.jpg'];
-    params.quote = "I like fruit loops";
+    params.quote = "peeber pls";
     params.pathToSelectedTemplateWithinBootstrap = 'bootstrap/docs/examples/cover';
     res.render('peeber', params);
 });

@@ -73,6 +73,13 @@ router.get('/random', function(req, res, next) {
     res.render('clyp', params); 
 });
 
+router.get('/peeber', function(req, res, next) {
+    params.images[0] = ['img/peeber.jpg'];
+    params.quote = "peeber pls";
+    params.pathToSelectedTemplateWithinBootstrap = 'bootstrap/docs/examples/cover';
+    res.render('peeber', params);
+});
+
 var params = {
     menu: ['website', 'peeber', 'clyp'],
     images: [],
