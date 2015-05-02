@@ -43,16 +43,22 @@ block content
   h1 Hello, World!
   .container
     .row
-      .col-md-6
+      .col-md-3
         .starter-template(style="padding-top:70px;")
           form(role='form',action='/clyp',method='post', id='usrform')
             div.form-group: label(for='audioURL') Enter Clyp.it URL:  
                 input.form-control(id='audioURL',type='audioURL',name='audioURL',placeholder="")
             input#map-updater(type='submit',value='Submit')
-            p Click submit again to see location on map
-      .col-md-6
-        p Longitude: #{longitude}
-        p Latitude: #{latitude}
+      .col-md-3
+        .starter-template(style="padding-top:70px;")
+          form(role='form',action='/clyp/random',method='get')
+            div.form-group: label Random person's location. Not creepy 
+            input(type='submit',value='Random')
+      .col-md-3
+        .starter-template(style="padding-top:70px;")
+          p Longitude: #{longitude}
+          p Latitude: #{latitude}
+          a(href="#{url}") #{url}
   .container
     .row
       .col-md-12

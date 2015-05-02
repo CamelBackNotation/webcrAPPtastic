@@ -11,11 +11,8 @@ router.post('/', function(req, res, next) {
     getCoordinates(URL, function(err, coords) {
         params.latitude = coords[0];
         params.longitude = coords[1];
+        res.render('clyp', params);
     });
-    console.log(params.latitude);
-    console.log(params.longitude);
-
-    res.render('clyp', params);
 });
 
 function getCoordinates(URL, callback) {
@@ -47,14 +44,41 @@ router.get('/', function(req, res, next) {
     res.render('clyp', params); 
 });
 
+router.get('/random', function(req, res, next) {
+    https.get("https://api.clyp.it/featuredlist/random/?count=1", function(res) {
+        res.setEncoding('utf8');
+        var data = '';
+        res.on('data', function(chunk) {
+            data += chunk;
+        });
+
+        res.on('end', function() {
+            var obj = JSON.parse(data);
+            console.log(obj);
+            obj.forEach(function(item) {
+                console.log(item.Latitude);
+                console.log(item.Longitude);
+                console.log(item.Url);
+                params.latitude = item.Latitude;
+                params.longitude = item.Longitude;
+                params.url = item.Url;
+            });
+        });
+    });
+    console.log(params.longitude);
+    console.log(params.latitude);
+    console.log(params.url);
+    res.render('clyp', params); 
+});
+
 var params = {
     menu: ['website', 'peeber', 'clyp'],
     images: [],
     clypResults: [''],
     longitude: -97.74,
     latitude: 30.3,
+    url: '',
     API_KEY: 'AIzaSyCQ-y9WlQd9Y_TNL4JwvAHFbuxo7m2KGxA'
-    //Necessary bootstrap.jade paths
   }
 
 
