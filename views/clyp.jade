@@ -14,7 +14,7 @@ block append head
       var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        title: "This is where the sound comes from"
+        title: "Get rekt peeber"
       });
     var mapDiv = document.getElementById('map-updater');
     google.maps.event.addListener(mapDiv, 'click', refresh);
@@ -49,9 +49,10 @@ block content
             div.form-group: label(for='audioURL') Enter Clyp.it URL:  
                 input.form-control(id='audioURL',type='audioURL',name='audioURL',placeholder="")
             input#map-updater(type='submit',value='Submit')
+            p Click submit again to see location on map
       .col-md-6
-        for item in clypResults
-          p #{item}
+        p Longitude: #{longitude}
+        p Latitude: #{latitude}
   .container
     .row
       .col-md-12
