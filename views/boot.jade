@@ -1,9 +1,6 @@
 extends layout
 block head append
     link(href='#{pathToAssets}/dist/css/bootstrap.min.css', rel='stylesheet')
-    // Custom styles for this template
-    link(href='#{pathToSelectedTemplateWithinBootstrap}/cover.css', rel='stylesheet')
-
 block content
     nav.navbar.navbar-default.navbar-fixed-top.navbar-shrink
       .container
@@ -44,20 +41,23 @@ block content
 
     .container
       .starter-template(style="padding-top:70px;")
-        form(role='form',action='/',method='post', id='usrform')
+        form(role='form',action='/peeber',method='post', id='usrform')
             div.form-group
                 label(for='name') Name:  
                     input.form-control(id='name',type='text',name='name')
+            // div.form-group
+            //     label(for='password') Password:  
+            //         input.form-control(id='password',type='password',name='password')
             div.form-group
-                label(for='password') Password:  
-                    input.form-control(id='password',type='password',name='password')
+                label(for='usrQuote') Favorite quote:  
+                    input.form-control(id='usrQuote',type='usrQuote',name='usrQuote')
             div.form-group
-                label(for='tagbox') Tags:  
-                    input.form-control(id='tagbox',type='tagbox',name='tagbox')
+                label(for='imgURL') Enter image URL:  
+                    input.form-control(id='imgURL',type='imgURL',name='imgURL',placeholder="i.imgur.com/OHiWmhF.jpg")
             input(type='submit',value='Submit')
 
-        textarea(rows='4', cols='50', form='usrform', name='taganalysis')
-          | #{taganalysis}
+        // textarea(rows='4', cols='50', form='usrform', name='taganalysis')
+        //   | #{taganalysis}
 
 
 

@@ -14,29 +14,45 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-  params.menu = ['Home', 'mywebsite', 'peeber'];
+  params.menu = ['Home', 'website', 'peeber'];
   res.render('boot', params);
 });
 /* POST and GET home page end */
 /* GET website start */
-router.get('/mywebsite', function(req, res, next) {
-    res.render('mywebsite', {});
+router.get('/website', function(req, res, next) {
+    res.render('website', {});
 });
 /* GET website end */
 /* GET Peeber start */
-router.get('/peeber', function(req, res, next) {
-    params.menu = ['Home', 'mywebsite'];
+router.post('/peeber', function(req, res, next) {
+    params.menu = ['Home', 'website'];
     params.images = ['img/peeber.jpg'];
+    params.quote = "I'm too retarded to submit a quote when asked!";
+    if(req.body.imgURL !== '')
+        params.images[0] = req.body.imgURL;
+    if(req.body.usrQuote !== '') {
+        params.quote = req.body.usrQuote;
+        console.log("I'm in the if statement for usrQuote!!");
+    }
+    params.pathToSelectedTemplateWithinBootstrap = 'bootstrap/docs/examples/cover';
+    res.render('peeber', params);
+});
+router.get('/peeber', function(req, res, next) {
+    params.menu = ['Home', 'website'];
+    params.images[0] = ['img/peeber.jpg'];
+    params.quote = "I like fruit loops";
     params.pathToSelectedTemplateWithinBootstrap = 'bootstrap/docs/examples/cover';
     res.render('peeber', params);
 });
 
 
+
 var params = {
     title: 'Hell!',
     description: "Well that's what you're here to find out!",
-    menu: ['ExpressTest', 'Home', 'mywebsite', 'Peeber', ''],
+    menu: ['ExpressTest', 'Home', 'website', 'Peeber', ''],
     images: [],
+    quote: '',
 
     //Necessary bootstrap.jade paths
     pathToAssets: 'bootstrap',
