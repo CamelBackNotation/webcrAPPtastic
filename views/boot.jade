@@ -1,4 +1,8 @@
 extends layout
+block head append
+    link(href='#{pathToAssets}/dist/css/bootstrap.min.css', rel='stylesheet')
+    // Custom styles for this template
+    link(href='#{pathToSelectedTemplateWithinBootstrap}/cover.css', rel='stylesheet')
 
 block content
     nav.navbar.navbar-default.navbar-fixed-top.navbar-shrink
@@ -33,7 +37,7 @@ block content
               a(href='#{menu[2]}') #{menu[2]}
             |                     
             li.page-scroll
-              a(href='#contact') Contact
+              a(href='#{menu[3]}') #{menu[3]}
         // /.navbar-collapse
       // /.container-fluid
     // Header
