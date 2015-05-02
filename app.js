@@ -10,6 +10,7 @@ var users = require('./routes/users');
 var boot = require('./routes/boot');
 var stuff = require('./routes/stuff');
 var blog = require('./routes/blog');
+var clyp = require('./routes/clyp');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/', boot);
 app.use('/blog', blog);
 app.use('/users', users);
 app.use('/boot', boot);
+app.use('/clyp', clyp);
 
 
 // catch 404 and forward to error handler

@@ -1,44 +1,40 @@
 extends layout
 
 block content
-  body
-    // Navigation
-    nav.navbar.navbar-default.navbar-fixed-top.navbar-shrink
-      .container
-        // Brand and toggle get grouped for better mobile display
-        .navbar-header.page-scroll
-          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
-            span.sr-only Toggle navigation
-            |                     
-            span.icon-bar
-            |                     
-            span.icon-bar
-            |                     
-            span.icon-bar
-          |                 
-          a.navbar-brand.hidden-xs(href='#page-top') Joshua Hurt
-          |                 
-          .navbar-brand.visible-xs Joshua Hurt
-        // Collect the nav links, forms, and other content for toggling
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          ul.nav.navbar-nav.navbar-right
-            li.hidden
-              a(href='#page-top')
-            |                     
-            li.page-scroll
-              a(href='/') Home
-            |                     
-            li.page-scroll
-              a(href='#portfolio') Portfolio
-            |                     
-            li.page-scroll
-              a(href='#about') About
-            |                     
-            li.page-scroll
-              a(href='#contact') Contact
-        // /.navbar-collapse
-      // /.container-fluid
-    // Header
+  include navbar
+  nav.navbar.navbar-default.navbar-fixed-top.navbar-shrink
+    .container
+      // Brand and toggle get grouped for better mobile display
+      .navbar-header.page-scroll
+        button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+          span.sr-only Toggle navigation
+          |                     
+          span.icon-bar
+          |                     
+          span.icon-bar
+          |                     
+          span.icon-bar
+        |                 
+        a.navbar-brand.hidden-xs(href='#page-top') Joshua Hurt
+        |                 
+        .navbar-brand.visible-xs Joshua Hurt
+      // Collect the nav links, forms, and other content for toggling
+      #bs-example-navbar-collapse-1.collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-right
+          li.hidden
+            a(href='#page-top')
+          |                     
+          li.page-scroll
+            a(href='/') Home
+          |                     
+          li.page-scroll
+            a(href='#portfolio') Portfolio
+          |                     
+          li.page-scroll
+            a(href='#about') About
+          |                     
+          li.page-scroll
+            a(href='#contact') Contact
     header
       .container
         .row

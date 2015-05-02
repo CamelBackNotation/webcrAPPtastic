@@ -3,42 +3,9 @@ block head append
     link(href='#{pathToAssets}/dist/css/bootstrap.min.css', rel='stylesheet')
     // Custom styles for this template
     link(href='#{pathToSelectedTemplateWithinBootstrap}/cover.css', rel='stylesheet')
-
 block content
-    nav.navbar.navbar-default.navbar-fixed-top.navbar-shrink
-      .container
-        // Brand and toggle get grouped for better mobile display
-        .navbar-header.page-scroll
-          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
-            span.sr-only Toggle navigation
-            |                     
-            span.icon-bar
-            |                     
-            span.icon-bar
-            |                     
-            span.icon-bar
-          |                 
-          a.navbar-brand.hidden-xs(href='#page-top') Joshua Hurt
-          |                 
-          .navbar-brand.visible-xs Joshua Hurt
-        // Collect the nav links, forms, and other content for toggling
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          ul.nav.navbar-nav.navbar-right
-            li.hidden
-              a(href='#page-top')
-            |                     
-            li.page-scroll
-              a(href='/') Home
-            |                     
-            li.page-scroll
-              a(href='#{menu[1]}') #{menu[1]}
-            |                     
-            li.page-scroll
-              a(href='#{menu[2]}') #{menu[2]}
-            |                     
-            li.page-scroll
-              a(href='#{menu[3]}') #{menu[3]}
-    .container
-        img.img-responsive(src='#{images[0]}', style="padding-top: 60px;")
-        h4
-            q #{quote}
+  include navbar
+  .container
+  img.img-responsive(src='#{images[0]}', style="padding-top: 60px;")
+  h4
+    q #{quote}

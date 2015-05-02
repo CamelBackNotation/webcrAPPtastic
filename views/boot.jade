@@ -1,63 +1,25 @@
 extends layout
-block head append
-    link(href='#{pathToAssets}/dist/css/bootstrap.min.css', rel='stylesheet')
 block content
-    nav.navbar.navbar-default.navbar-fixed-top.navbar-shrink
-      .container
-        // Brand and toggle get grouped for better mobile display
-        .navbar-header.page-scroll
-          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
-            span.sr-only Toggle navigation
-            |                     
-            span.icon-bar
-            |                     
-            span.icon-bar
-            |                     
-            span.icon-bar
-          |                 
-          a.navbar-brand.hidden-xs(href='#page-top') Joshua Hurt
-          |                 
-          .navbar-brand.visible-xs Joshua Hurt
-        // Collect the nav links, forms, and other content for toggling
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          ul.nav.navbar-nav.navbar-right
-            li.hidden
-              a(href='#page-top')
-            |                     
-            li.page-scroll
-              a(href='/') Home
-            |                     
-            li.page-scroll
-              a(href='#{menu[1]}') #{menu[1]}
-            |                     
-            li.page-scroll
-              a(href='#{menu[2]}') #{menu[2]}
-            |                     
-            li.page-scroll
-              a(href='#{menu[3]}') #{menu[3]}
-        // /.navbar-collapse
-      // /.container-fluid
-    // Header
+  include navbar
+  .container
+    .starter-template(style="padding-top:70px;")
+      form(role='form',action='/peeber',method='post', id='usrform')
+        div.form-group
+          label(for='name') Name:  
+            input.form-control(id='name',type='text',name='name')
+          // div.form-group
+          //     label(for='password') Password:  
+          //         input.form-control(id='password',type='password',name='password')
+        div.form-group
+          label(for='usrQuote') Favorite quote:  
+            input.form-control(id='usrQuote',type='usrQuote',name='usrQuote')
+        div.form-group
+          label(for='imgURL') Enter image URL:  
+            input.form-control(id='imgURL',type='imgURL',name='imgURL',placeholder="i.imgur.com/OHiWmhF.jpg")
+        input(type='submit',value='Submit')
 
-    .container
-      .starter-template(style="padding-top:70px;")
-        form(role='form',action='/peeber',method='post', id='usrform')
-            div.form-group
-                label(for='name') Name:  
-                    input.form-control(id='name',type='text',name='name')
-            // div.form-group
-            //     label(for='password') Password:  
-            //         input.form-control(id='password',type='password',name='password')
-            div.form-group
-                label(for='usrQuote') Favorite quote:  
-                    input.form-control(id='usrQuote',type='usrQuote',name='usrQuote')
-            div.form-group
-                label(for='imgURL') Enter image URL:  
-                    input.form-control(id='imgURL',type='imgURL',name='imgURL',placeholder="i.imgur.com/OHiWmhF.jpg")
-            input(type='submit',value='Submit')
-
-        // textarea(rows='4', cols='50', form='usrform', name='taganalysis')
-        //   | #{taganalysis}
+      // textarea(rows='4', cols='50', form='usrform', name='taganalysis')
+      //   | #{taganalysis}
 
 
 
