@@ -1,0 +1,35 @@
+extends layout
+block head append
+    link(href='#{pathToAssets}/dist/css/bootstrap.min.css', rel='stylesheet')
+    // Custom styles for this template
+    link(href='#{pathToSelectedTemplateWithinBootstrap}/cover.css', rel='stylesheet')
+
+block content
+    body
+        .site-wrapper
+          .site-wrapper-inner
+            .cover-container
+              .masthead.clearfix
+                .inner
+                  h3.masthead-brand Cover
+                  ul.nav.masthead-nav
+                    li.active
+                      a(href='#') Home
+                    li
+                      a(href='#') Features
+                    li
+                      a(href='#') Contact
+                header
+                  .container
+                    .row
+                      .col-lg-12
+                        img.img-responsive.img-rounded.header-img(src='img/peeber.jpg', alt='')
+                    blockquote
+                        div
+                            p "I like fruit loops"
+    // Bootstrap core JavaScript
+    // ==================================================
+    // Placed at the end of the document so the pages load faster
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+    script(src='#{pathToAssets}/dist/js/bootstrap.min.js')
+    script(src='#{pathToAssets}/docs/assets/js/_vendor/holder.js')

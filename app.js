@@ -9,6 +9,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var boot = require('./routes/boot');
 var stuff = require('./routes/stuff');
+var blog = require('./routes/blog');
 
 var app = express();
 
@@ -25,6 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', boot);
+app.use('/blog', blog);
 app.use('/users', users);
 app.use('/boot', boot);
 

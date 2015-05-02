@@ -27,13 +27,17 @@ block content
               a(href='/') Home
             |                     
             li.page-scroll
-              a(href='/mywebsite') #{menu[2]}
+              a(href='#{menu[1]}') #{menu[1]}
             |                     
             li.page-scroll
-              a(href='#about') About
+              a(href='#{menu[2]}') #{menu[2]}
             |                     
             li.page-scroll
               a(href='#contact') Contact
+        // /.navbar-collapse
+      // /.container-fluid
+    // Header
+
     .container
       .starter-template(style="padding-top:70px;")
         form(role='form',action='/',method='post', id='usrform')
