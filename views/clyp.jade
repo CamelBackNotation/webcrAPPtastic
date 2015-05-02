@@ -58,9 +58,10 @@ block content
         .starter-template(style="padding-top:70px;")
           p Longitude: #{longitude}
           p Latitude: #{latitude}
+          p
+            a(href="#{url}") #{url}
           audio(controls)
             source(src="#{mp3}", type="audio/mpeg")
-          a(href="#{mp3}")
   .container
     .row
       .col-md-12
