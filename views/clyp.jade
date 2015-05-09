@@ -66,3 +66,9 @@ block content
     .row
       .col-md-12
         #map-canvas
+
+append scripts
+  script(src='/javascripts/jquery.bootstrap-autohidingnavbar.js')
+  |     
+  script.
+    $(".navbar-fixed-top").autoHidingNavbar();
