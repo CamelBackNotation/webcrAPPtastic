@@ -45,8 +45,11 @@ function getComic (character, callback) {
             var obj = JSON.parse(apiJson);
             var numComics = '';
             var description = '';
+            var attribution;
             if (typeof obj.data !== 'undefined') {
                 console.log("Number of results: " +obj.data.results.length);
+                attribution = obj.attributionText;
+                console.log(obj.attributionText);
                 var firstResults = obj.data.results[0];
             }
             if (typeof firstResults !== 'undefined') {
@@ -68,13 +71,13 @@ var params = {
             name: '',
             description: '',
             comics: 0,
-            rsltList: 0
+            attribution: ''
         },
         {
             name: '',
             description: '',
             comics: 0,
-            rsltList: 0
+            attribution: ''
         }
     ],
 
