@@ -3,33 +3,34 @@ extends layout
 block content
   include navbar
   .container
+    br
+    br
+    br
     .row
-      .col-md-2
-        br
-        br
-        h2 Oh hey there Mahvel!
-        form(role='form',action='/marvel',method='post') 
-          div.form-group
-            label(for='name') Character Name:  
-              input.form-control(id='name',type='text',name='name')
-          // div.form-group
-          //   label(for='name2') Another Character Name:  
-          //     input.form-control(id='name2',type='text',name='name2')
-          input(type='submit',value='Search')
-      .col-md-9
-        br
-        br
-        br
-        h3
-          u #{apiResults[0].name}
-        h4 Description:
-        if(apiResults[0].description.length > 0)
-          p 
-            i "#{apiResults[0].description}"
-        else
-          br
-        h4 Number of comics character has appeared in:
-        p #{apiResults[0].comics}
+      .panel
+        .col-md-2
+          h2 Oh hey there Mahvel!
+          form(role='form',action='/marvel',method='post') 
+            div.form-group
+              label(for='name') Character Name:  
+                input.form-control(id='name',type='text',name='name')
+            input(type='submit',value='Search')
+        .col-md-7
+          h3
+            u #{apiResults[0].name}
+          h4 Description:
+          if(apiResults[0].description.length > 0)
+            p 
+              i "#{apiResults[0].description}"
+          else
+            br
+          h4 Number of comics character has appeared in:
+          p #{apiResults[0].comics}
+        .col-md-3
+            if(typeof apiResults[0].thumbnail !== 'undefined')
+              img(src="#{apiResults[0].thumbnail}.jpg", width="100%", height="100%") 
+            else
+              p
   .footer
     .container
       p.text-muted Data provided by Marvel. © 2015 MARVEL

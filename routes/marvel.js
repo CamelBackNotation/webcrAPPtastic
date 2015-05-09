@@ -3,7 +3,10 @@ var router = express.Router();
 var fs = require('fs');
 var assert = require('assert');
 var http = require('http');
+var pg = require('pg');
 var md5 = require('md5-node');
+
+
 
 
 router.get('/', function(req, res, next) {
@@ -15,11 +18,12 @@ router.post('/', function(req, res, next) {
     if (user_input.length < 1)
         res.render('marvel', params);
     else {
-        getComic(user_input, function(err, summary, numComics) {
+        getComic(user_input, function(err, summary, numComics, thumbnail) {
             params.apiResults[0].name = user_input;
             console.log(params.name);
             params.apiResults[0].comics = numComics;
             params.apiResults[0].description = summary;
+            params.apiResults[0].thumbnail = thumbnail;
             console.log("description is here: "+summary.length);
             res.render('marvel', params);
         });
@@ -46,20 +50,22 @@ function getComic (character, callback) {
             var obj = JSON.parse(apiJson);
             var numComics = '';
             var description = '';
+            var thumbnail;
             var attribution;
             if (typeof obj.data !== 'undefined') {
                 console.log("Number of results: " +obj.data.results.length);
                 attribution = obj.attributionText;
-                console.log(obj.attributionText);
                 var firstResults = obj.data.results[0];
             }
             if (typeof firstResults !== 'undefined') {
                 numComics = firstResults.comics.available;
                 description = firstResults.description;
+                thumbnail = firstResults.thumbnail.path;
+                console.log(thumbnail.path);
                 if (numComics && !description)
                     description = "No description listed for this character";
             }
-            return callback(null, description, numComics);
+            return callback(null, description, numComics, thumbnail);
         });
     });
 };
@@ -72,12 +78,14 @@ var params = {
             name: '',
             description: '',
             comics: 0,
+            image: '',
             attribution: ''
         },
         {
             name: '',
             description: '',
             comics: 0,
+            image: '',
             attribution: ''
         }
     ],
