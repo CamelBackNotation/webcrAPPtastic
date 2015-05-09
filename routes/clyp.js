@@ -22,6 +22,10 @@ router.post('/', function(req, res, next) {
     });
 });
 
+
+/*********************** START ************************************** 
+  My own defined functions to find location. Now obsolete */
+
 function getCoordinates(URL, callback) {
     https.get('https://api.clyp.it/'+URL, function(res) {
         res.setEncoding('utf8');
@@ -60,6 +64,8 @@ function getRandClyp(URL, callback) {
     });
 }
 
+/*********************** END ************************************** 
+  My own defined functions to find location. Now obsolete */
 
 router.get('/', function(req, res, next) {
     console.log('THE GET WORKED!!' + req.body);

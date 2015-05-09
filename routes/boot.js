@@ -1,14 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var indico = require('indico.io');
-indico.apiKey = '98fb49ab39eaa7507cf3f36379379bca';
 
 /* POST and GET home page start */
 router.post('/', function(req, res, next) {
     console.log(req.body);
-    var analysis = indico.text_tags(req.body.tagbox);
-    console.log(typeof analysis);
-    params.taganalysis = req.body.tagbox;
     res.render('boot', params);
     console.log(params.textBox);
 });
@@ -48,7 +43,7 @@ router.get('/peeber', function(req, res, next) {
 var params = {
     title: 'Hell!',
     description: "Well that's what you're here to find out!",
-    menu: ['website', 'peeber', 'clyp'],
+    menu: ['website', 'peeber', 'clyp', 'marvel'],
     images: [],
     quote: '',
 

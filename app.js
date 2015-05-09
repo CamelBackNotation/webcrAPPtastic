@@ -11,6 +11,7 @@ var boot = require('./routes/boot');
 var stuff = require('./routes/stuff');
 var blog = require('./routes/blog');
 var clyp = require('./routes/clyp');
+var marvel = require('./routes/marvel');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', boot);
 app.use('/blog', blog);
+app.use('/marvel', marvel);
 app.use('/users', users);
 app.use('/boot', boot);
 app.use('/clyp', clyp);

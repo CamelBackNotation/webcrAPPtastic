@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  include navbar
+  .container
+    .row
+      .col-md-4
+        br
+        br
+        h1 Oh hey there Mahvel!
+        p Gonna try to do an API call here.
+        p This is my public key #{API_KEY}
+        p This is my ts value #{ts}
+        p This might be my checksum #{MD5}
+        p Does this work? Just adding a parameter to my object? #{message}
+      .col-md-6
+        br
+        br
+        br
+        h4 Description:
+        p
+          i "#{apiResults.description}"
+        h4 Number of comics character has appeared in:
+        p #{apiResults.comics}
+  .container
+    .row
+      .col-md-4
+        form(role='form',action='/marvel',method='post') 
+          div.form-group
+            label(for='name') Character Name:  
+              input.form-control(id='name',type='text',name='name')
+          input(type='submit',value='Submit')
