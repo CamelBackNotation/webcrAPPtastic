@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
+var assert = require('assert');
 var http = require('http');
 var md5 = require('md5-node');
 
@@ -11,19 +12,17 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     var user_input = req.body.name;
-    console.log(typeof user_input);
-    if (typeof user_input !== 'string') {
-        console.log("I am in my if statement of the post function");
-        return console.error("Fuck you");
-    }
-    console.log("The user is asking for details on "+user_input);
-    // params.message = "Hulk";
-    getComic(user_input, function(err, summary, numComics) {
-        params.apiResults.comics = numComics;
-        params.apiResults.description = summary;
-        console.log("Good job! You got some results back about "+params.message);
+    if (user_input.length < 1)
         res.render('marvel', params);
-    });
+    else {
+        getComic(user_input, function(err, summary, numComics) {
+            params.apiResults[0].name = user_input;
+            console.log(params.name);
+            params.apiResults[0].comics = numComics;
+            params.apiResults[0].description = summary;
+            res.render('marvel', params);
+        });
+    }
 });
 
 function getComic (character, callback) {
@@ -44,12 +43,17 @@ function getComic (character, callback) {
         });
         res.on('end', function() {
             var obj = JSON.parse(apiJson);
-            var firstResults = obj.data.results[0];
             var numComics = '';
-            var description = 'No description available';
+            var description = '';
+            if (typeof obj.data !== 'undefined') {
+                console.log("Number of results: " +obj.data.results.length);
+                var firstResults = obj.data.results[0];
+            }
             if (typeof firstResults !== 'undefined') {
                 numComics = firstResults.comics.available;
                 description = firstResults.description;
+                if (numComics && !description)
+                    description = "No description listed for this character";
             }
             return callback(null, description, numComics);
         });
@@ -57,17 +61,22 @@ function getComic (character, callback) {
 };
 
 
-
 var params = {
     menu: ['website', 'peeber'],
-    apiResults: {
-        name: '',
-        description: '',
-        comics: 0
-    },
-
-
-
+    apiResults: [
+        {
+            name: '',
+            description: '',
+            comics: 0,
+            rsltList: 0
+        },
+        {
+            name: '',
+            description: '',
+            comics: 0,
+            rsltList: 0
+        }
+    ],
 
     /* Stuff required for API calls TODO: implement proper timestamp functionality */
     ts: '1',
@@ -75,5 +84,6 @@ var params = {
     API_KEY: '8f08bf4a805c12f24472cefbd4a71153', //public api key
     MD5: md5(this.ts + this.PRIVATE_API_KEY + this.API_KEY)
 } 
+
 
 module.exports = router;
