@@ -20,6 +20,7 @@ router.post('/', function(req, res, next) {
             console.log(params.name);
             params.apiResults[0].comics = numComics;
             params.apiResults[0].description = summary;
+            console.log("description is here: "+summary.length);
             res.render('marvel', params);
         });
     }
