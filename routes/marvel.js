@@ -32,11 +32,11 @@ router.post('/', function(req, res, next) {
 
 function getComic (character, callback) {
     var md5Calc = md5(params.ts + params.PRIVATE_API_KEY + params.API_KEY);
-    var URL = "http://gateway.marvel.com/v1/public/characters"
-    +"?name="+character
-    +"&apikey="+params.API_KEY
-    +"&hash="+md5Calc
-    +"&ts="+params.ts;
+    var URL = "http://gateway.marvel.com/v1/public/characters" +
+    "?name="+character +
+    "&apikey="+params.API_KEY +
+    "&hash="+md5Calc +
+    "&ts="+params.ts;
     console.log(URL);
 /* URL GET FORMAT: http://gateway.marvel.com/v1/public/{category} */
     http.get(URL, function(res) {
@@ -52,24 +52,24 @@ function getComic (character, callback) {
             var description = '';
             var thumbnail;
             var attribution;
+            var firstResults;
             if (typeof obj.data !== 'undefined') {
                 console.log("Number of results: " +obj.data.results.length);
                 attribution = obj.attributionText;
-                var firstResults = obj.data.results[0];
+                firstResults = obj.data.results[0];
             }
             if (typeof firstResults !== 'undefined') {
                 numComics = firstResults.comics.available;
                 description = firstResults.description;
-                thumbnail = firstResults.thumbnail.path;
-                console.log(thumbnail.path);
+                if (firstResults.thumbnail)
+                    thumbnail = firstResults.thumbnail.path;
                 if (numComics && !description)
                     description = "No description listed for this character";
             }
             return callback(null, description, numComics, thumbnail);
         });
     });
-};
-
+}
 
 var params = {
     menu: ['website', 'peeber'],
@@ -95,7 +95,7 @@ var params = {
     PRIVATE_API_KEY: '5fb138748315cb5e0d7b7d36cfc480448d5510a2', //hide me
     API_KEY: '8f08bf4a805c12f24472cefbd4a71153', //public api key
     MD5: md5(this.ts + this.PRIVATE_API_KEY + this.API_KEY)
-} 
+};
 
 
 module.exports = router;
