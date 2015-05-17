@@ -47,7 +47,7 @@ block content
     .row
       .col-md-6
         p
-          i I contacted the creator of Clyp.it to inform him his API gave location information within a mile of a user's real address. He thanked me then removed that data from the returned JSON. So, there is no longer location information available.
+          i I contacted the creator of Clyp.it to inform him his API gave location information, and that I was concerned why anyone could get that information. He thanked me for bringing it to his attention then removed that data from the returned JSON. So, there is no longer location information available.
   .container
     .row
       .col-md-3
@@ -67,6 +67,14 @@ block content
             a(href="#{clypResults.url}") #{clypResults.url}
           audio(controls)
             source(src="#{clypResults.mp3}", type="audio/mpeg")
+    .row
+      .col-md-8.col-md-offset-4
+        br
+        br
+        br
+        br
+        br
+        i There used to be a map here 
 append scripts
   script(src='/javascripts/jquery.bootstrap-autohidingnavbar.js')
   |     

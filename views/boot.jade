@@ -3,29 +3,31 @@ block content
   include navbar
   .row
     .container
-      .starter-template(style="padding-top:70px;")
-        form(role='form',action='/peeber',method='post', id='usrform')
-          div.form-group
-            label(for='name') Name:  
-              input.form-control(id='name',type='text',name='name')
-            // div.form-group
-            //     label(for='password') Password:  
-            //         input.form-control(id='password',type='password',name='password')
-          div.form-group
-            label(for='usrQuote') Favorite quote:  
-              input.form-control(id='usrQuote',type='usrQuote',name='usrQuote')
-          div.form-group
-            label(for='imgURL') Enter image URL:  
-              input.form-control(id='imgURL',type='imgURL',name='imgURL')
-          input(type='submit',value='Submit')
-
-        // textarea(rows='4', cols='50', form='usrform', name='taganalysis')
-        //   | #{taganalysis}
-  .row
-    .container
+      br
       br
       br
       p This is my playground so a lot of stuff is probably broken or just doesn't make any sense whatsoever. 
+  .row
+    br
+    br
+    .container
+      form(role='form',action='/peeber',method='post', id='usrform')
+        div.form-group
+          label(for='name') Name:  
+            input.form-control(id='name',type='text',name='name')
+          // div.form-group
+          //     label(for='password') Password:  
+          //         input.form-control(id='password',type='password',name='password')
+        div.form-group
+          label(for='usrQuote') Favorite quote:  
+            input.form-control(id='usrQuote',type='usrQuote',name='usrQuote')
+        div.form-group
+          label(for='imgURL') Enter image URL:  
+            input.form-control(id='imgURL',type='imgURL',name='imgURL')
+        input(type='submit',value='Submit')
+
+        // textarea(rows='4', cols='50', form='usrform', name='taganalysis')
+        //   | #{taganalysis}
 
 
 
