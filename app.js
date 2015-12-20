@@ -34,7 +34,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 for (var i = 0; i < navigation_tabs.length; i++) {
   tab = navigation_tabs[i];
-  app.use('/'+tab.name, tab.route);
+  if (tab.name === 'boot')
+    app.use('/', tab.route);
+  else
+    app.use('/'+tab.name, tab.route);
 }
 
 
