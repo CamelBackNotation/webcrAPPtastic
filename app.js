@@ -5,13 +5,25 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-var boot = require('./routes/boot');
-var stuff = require('./routes/stuff');
-var blog = require('./routes/blog');
-var clyp = require('./routes/clyp');
-var marvel = require('./routes/marvel');
+var navigation_tabs = [
+  {name:'index', route:''},
+  {name:'users', route:''},
+  {name:'boot', route:''},
+  {name:'blog', route:''},
+  {name:'clyp', route:''},
+  {name:'marvel', route:''}
+];
+
+for (var i = 0; i < navigation_tabs.length; i++) {
+  navigation_tabs[i][1] = require('./routes/'+navigation_tabs[i][0]);
+}
+//var index = require('./routes/index');
+//var users = require('./routes/users');
+//var boot = require('./routes/boot');
+//var stuff = require('./routes/stuff');
+//var blog = require('./routes/blog');
+//var clyp = require('./routes/clyp');
+//var marvel = require('./routes/marvel');
 
 var app = express();
 
@@ -27,12 +39,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', boot);
-app.use('/blog', blog);
-app.use('/marvel', marvel);
-app.use('/users', users);
-app.use('/boot', boot);
-app.use('/clyp', clyp);
+for (var i = 0; i < navigation_tabs.length; i++) {
+  name = navigation_tabs[i].name;
+  app.user('/'+name, name);
+}
+//app.use('/', boot);
+//app.use('/blog', blog);
+//app.use('/marvel', marvel);
+//app.use('/users', users);
+//app.use('/boot', boot);
+//app.use('/clyp', clyp);
 
 
 // catch 404 and forward to error handler
