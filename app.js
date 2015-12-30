@@ -5,13 +5,18 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-var boot = require('./routes/boot');
-var stuff = require('./routes/stuff');
-var blog = require('./routes/blog');
-var clyp = require('./routes/clyp');
-var marvel = require('./routes/marvel');
+var navigation_tabs = [
+  {name:'index', route:null},
+  {name:'users', route:null},
+  {name:'boot', route:null},
+  {name:'blog', route:null},
+  {name:'clyp', route:null},
+  {name:'marvel', route:null}
+];
+
+for (var i = 0; i < navigation_tabs.length; i++) {
+  navigation_tabs[i].route = require('./routes/'+navigation_tabs[i].name);
+}
 
 var app = express();
 
@@ -27,12 +32,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', boot);
-app.use('/blog', blog);
-app.use('/marvel', marvel);
-app.use('/users', users);
-app.use('/boot', boot);
-app.use('/clyp', clyp);
+for (var i = 0; i < navigation_tabs.length; i++) {
+  tab = navigation_tabs[i];
+  if (tab.name === 'boot')
+    app.use('/', tab.route);
+  else
+    app.use('/'+tab.name, tab.route);
+}
 
 
 // catch 404 and forward to error handler

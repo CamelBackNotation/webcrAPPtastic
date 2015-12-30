@@ -24,7 +24,7 @@ router.post('/', function(req, res, next) {
             params.apiResults[0].comics = numComics;
             params.apiResults[0].description = summary;
             params.apiResults[0].thumbnail = thumbnail;
-            console.log("description is here: "+summary.length);
+            console.log("description is here: "+ summary.length);
             res.render('marvel', params);
         });
     }
@@ -54,7 +54,7 @@ function getComic (character, callback) {
             var attribution;
             var firstResults;
             if (typeof obj.data !== 'undefined') {
-                console.log("Number of results: " +obj.data.results.length);
+                console.log("Number of results: " + obj.data.results.length);
                 attribution = obj.attributionText;
                 firstResults = obj.data.results[0];
             }
