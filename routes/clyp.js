@@ -84,15 +84,15 @@ router.get('/random', function(req, res, next) {
 });
 
 router.get('/peeber', function(req, res, next) {
-    params.images[0] = ['img/peeber.jpg'];
+    params.images[1] = ['img/peeber.jpg'];
     params.quote = "peeber pls";
     params.pathToSelectedTemplateWithinBootstrap = 'bootstrap/docs/examples/cover';
     res.render('peeber', params);
 });
 
 var params = {
-    menu: ['website', 'peeber', 'clyp'],
-    images: [],
+    menu: ['portfolio', 'peeber', 'clyp', 'marvel'],
+    images: [0,0,0,0,0],
     clypResults: {
         longitude: -97.74,
         latitude: 30.3,

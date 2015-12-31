@@ -72,7 +72,7 @@ function getComic (character, callback) {
 }
 
 var params = {
-    menu: ['website', 'peeber'],
+    menu: ['portfolio', 'peeber', 'clyp', 'marvel'],
     apiResults: [
         {
             name: '',

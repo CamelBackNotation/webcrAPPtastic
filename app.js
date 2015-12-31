@@ -6,10 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var navigation_tabs = [
-  {name:'index', route:null},
-  {name:'users', route:null},
   {name:'boot', route:null},
-  {name:'blog', route:null},
   {name:'clyp', route:null},
   {name:'marvel', route:null}
 ];

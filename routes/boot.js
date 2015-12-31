@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var nav_tabs = ['portfolio', 'peeber', 'clyp', 'marvel'];
 
 /* POST and GET home page start */
 router.post('/', function(req, res, next) {
@@ -14,25 +15,13 @@ router.get('/', function(req, res, next) {
 });
 /* POST and GET home page end */
 /* GET website start */
-router.get('/website', function(req, res, next) {
-    res.render('website', params);
+router.get('/'+nav_tabs[0], function(req, res, next) {
+    res.render(nav_tabs[0], params);
 });
 /* GET website end */
 /* GET Peeber start */
-router.post('/peeber', function(req, res, next) {
-    params.images = ['img/peeber.jpg'];
-    params.quote = "I'm too retarded to submit a quote when asked!";
-    if(req.body.imgURL !== '')
-        params.images[0] = req.body.imgURL;
-    if(req.body.usrQuote !== '') {
-        params.quote = req.body.usrQuote;
-        console.log("I'm in the if statement for usrQuote!!");
-    }
-    params.pathToSelectedTemplateWithinBootstrap = 'bootstrap/docs/examples/cover';
-    res.render('peeber', params);
-});
 router.get('/peeber', function(req, res, next) {
-    params.images[0] = ['img/peeber.jpg'];
+    params.images[1] = ['img/peeber.jpg'];
     params.quote = "peeber pls";
     params.pathToSelectedTemplateWithinBootstrap = 'bootstrap/docs/examples/cover';
     res.render('peeber', params);
@@ -43,8 +32,8 @@ router.get('/peeber', function(req, res, next) {
 var params = {
     title: 'Hell!',
     description: "Well that's what you're here to find out!",
-    menu: ['website', 'peeber', 'clyp', 'marvel'],
-    images: [],
+    menu: nav_tabs,
+    images: [0,0,0,0,0],
     quote: '',
 
     //Necessary bootstrap.jade paths
