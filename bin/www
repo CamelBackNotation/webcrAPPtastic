@@ -6,6 +6,7 @@
 
 var app = require('../app');
 var debug = require('debug')('derp:server');
+var fs = require('fs');
 var http = require('http');
 var socketio = require('socket.io');
 
@@ -33,6 +34,7 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
+var log = fs.open('./msg.log', 'a+', function(err) {});
 var msg_log = [];
 var num_users = 0;
 /**
@@ -42,6 +44,16 @@ io.on('connection', function(socket) {
   console.log('Client connected...');
 
   socket.on('join', function() {
+    if (num_users == 0) {
+      console.log('Reading contents of log file to memory....');
+      var json_log = fs.readFileSync('./msg.log', 'utf8').replace(/}{/g,'},{');
+      msg_log = JSON.parse('['+json_log+']');
+      // History resets completely at 100
+      if (msg_log.length > 100) {
+        fs.unlinkSync(log);
+        console.log('Deleted msg.log');
+      }
+    }
     num_users++;
     for (var i = 0; i < msg_log.length; i++) {
       socket.emit('broad', { mine: false, msg: msg_log[i].msg, time: msg_log[i].time });
@@ -49,14 +61,20 @@ io.on('connection', function(socket) {
   });
 
   socket.on('disconnect', function() {
-    if (--num_users <= 0)
+    if (--num_users <= 0) {
+      for (var i = 0; i < msg_log.length; i++) {
+        fs.appendFileSync('./msg.log', JSON.stringify(msg_log[i]));
+        console.log('Appending file...');
+      }
       msg_log = [];
+    }
     console.log('A user has disconnected.');
   });
 
   socket.on('message', function(data) {
     socket.emit('broad', { mine: true, msg: data.msg, time: data.time });
     socket.broadcast.emit('broad', data);
+    console.log('msg_log: '+msg_log);
     msg_log.push(data);
   });
 });
