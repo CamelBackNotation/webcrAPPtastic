@@ -1,0 +1,79 @@
+extends layout
+
+
+block content
+  include navbar
+  head
+    title Chat client (only for two people but easily expandable)
+    style.
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #outgoing { list-style-type: none; margin: 0; padding: 0; }
+      #outgoing li { padding: 5px 10px; color: blue; }
+      #outgoing li:nth-child(odd) { background: #eee; }
+      #incoming { list-style-type: none; margin: 0; padding: 0; }
+      #incoming li { padding: 5px 10px; color: red; }
+      #incoming li:nth-child(odd) { background: #eee; }
+      #chat_area { width: 1000px; height: 600px; border: 5px solid blue; box-sizing: border-box; overflow: auto; }
+  br
+  br
+  br
+  br
+  br
+
+  .row
+    .col-md-offset-6.col-md-2
+      if (user != null)
+        img.img-rounded.center-block(src='#{user.photos[0].value}')
+      else
+        img.img-rounded.center-block(src='../img/anon.png')
+
+  .row
+    .col-md-offset-3.col-md-3
+      h3 Buddy
+    .col-md-2
+      if (user != null)
+        h3 #{user.displayName}
+      else
+        h3 You
+    a.btn-block.btn-social-icon.btn-twitter(href='/auth/twitter')
+      i.fa.fa-twitter
+      | Twitter
+  .container-fluid#chat_area
+    .row
+      .col-md-6
+        ul#incoming
+      .col-md-6
+        ul#outgoing
+
+  form(action='/chat')
+    input#m(autocomplete='off')
+    button Send
+
+append scripts
+  script(src="https://cdn.socket.io/socket.io-1.4.3.js")
+  script.
+    var socket = io.connect();
+    $('form').submit(function(){
+      var message = $('#m').val();
+      socket.emit('message', { mine: false, msg: message, time: Date() });
+      $('#m').val('');
+      return false;
+    });
+    socket.on('connect', function() {
+      socket.emit('join');
+    })
+
+    socket.on('broad', function (data) {
+      if (data.mine == false) {
+        $('#outgoing').append($('<li>').text(data.time));
+        $('#incoming').append($('<li>').text(data.msg));
+      }
+      else {
+        $('#outgoing').append($('<li>').text(data.msg));
+        $('#incoming').append($('<li>').text(data.time));
+      }
+      //$('#incoming')[0].scrollTop = $('#incoming')[0].scrollHeight;
+    });
+

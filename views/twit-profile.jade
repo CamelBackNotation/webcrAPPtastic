@@ -1,0 +1,11 @@
+extends layout
+block append head
+block content
+  include navbar
+  br
+  br
+  br
+  ul
+    li #{user.id}
+    li #{user.username}
+    li #{user.email}
