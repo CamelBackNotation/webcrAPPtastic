@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var nav_tabs = ['portfolio', 'peeber', 'clyp', 'marvel'];
+var nav_tabs = ['portfolio', 'peeber', 'clyp', 'marvel', 'chat'];
 
 /* POST and GET home page start */
 router.post('/', function(req, res, next) {

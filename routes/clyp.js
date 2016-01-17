@@ -91,7 +91,7 @@ router.get('/peeber', function(req, res, next) {
 });
 
 var params = {
-    menu: ['portfolio', 'peeber', 'clyp', 'marvel'],
+    menu: ['portfolio', 'peeber', 'clyp', 'marvel', 'chat'],
     images: [0,0,0,0,0],
     clypResults: {
         longitude: -97.74,

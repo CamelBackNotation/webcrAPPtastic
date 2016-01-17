@@ -4,11 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+var Strategy = require('passport-twitter').Strategy;
 
 var navigation_tabs = [
   {name:'boot', route:null},
   {name:'clyp', route:null},
-  {name:'marvel', route:null}
+  {name:'marvel', route:null},
+  {name:'chat', route:null}
 ];
 
 for (var i = 0; i < navigation_tabs.length; i++) {
@@ -36,6 +39,65 @@ for (var i = 0; i < navigation_tabs.length; i++) {
   else
     app.use('/'+tab.name, tab.route);
 }
+
+/**
+ * Passport OAUTH stuff with Twitter
+ */
+passport.use(new Strategy({
+      // I should obfuscate these but... that's for later
+      consumerKey:  'G1QPKOEi4ONljqE9LtAIUzvDE',
+      consumerSecret:  'gFhgn1aFHSLTh4MsrUiaSzSwd8c9B9ip2RXEievSvjic7bsujY',
+      callbackURL: 'http://joshuahurt.herokuapp.com/auth/twitter'
+    },
+    function(token, tokenSecret, profile, cb) {
+      // In this example, the user's Twitter profile is supplied as the user
+      // record.  In a production-quality application, the Twitter profile should
+      // be associated with a user record in the application's database, which
+      // allows for account linking and authentication with other identity
+      // providers.
+      return cb(null, profile);
+
+    }));
+
+// In order to restore authentication state across HTTP requests, Passport needs
+// to serialize users into and deserialize users out of the session.  In a
+// production-quality application, this would typically be as simple as
+// supplying the user ID when serializing, and querying the user record by ID
+// from the database when deserializing.  However, due to the fact that this
+// example does not have a database, the complete Twitter profile is serialized
+// and deserialized.
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+app.use(require('express-session')
+  ({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+
+// Initialize Passport and restore authentication state, if any, from the
+// session.
+app.use(passport.initialize());
+app.use(passport.session());
+// Routing for authentication/redirection
+app.get('/chat', function(req, res) {
+  res.render('chat', { user: req.user });
+})
+app.get('/auth', passport.authenticate('twitter'));
+
+app.get('/auth/twitter',
+    passport.authenticate('twitter', { failureRedirect: '/', failureFlash: true }),
+    function(req, res) {
+      //res.render('chat', {user: req.user});
+      res.redirect('/chat/auth');
+    });
+app.get('/chat/auth', function(req, res) {
+  console.log(res.url);
+  params.user = req.user;
+  res.render('chat', params);
+});
 
 
 // catch 404 and forward to error handler
@@ -70,4 +132,9 @@ app.use(function(err, req, res, next) {
 });
 
 
+var params = {
+  menu: ['portfolio', 'peeber', 'clyp', 'marvel', 'chat'],
+  images: [0,0,0,0,0],
+  user: null
+};
 module.exports = app;
